@@ -11,6 +11,10 @@
 		3A221AB12BBC97D9009C4792 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A221AB02BBC97D9009C4792 /* ContentView.swift */; };
 		3A221AB32BBC97DA009C4792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A221AB22BBC97DA009C4792 /* Assets.xcassets */; };
 		3A221AB62BBC97DA009C4792 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A221AB52BBC97DA009C4792 /* Preview Assets.xcassets */; };
+		3AD3674F2BBC9C1C00883573 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3674E2BBC9C1C00883573 /* ColorTheme.swift */; };
+		3AD367522BBCB74100883573 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AD367512BBCB74100883573 /* Launch Screen.storyboard */; };
+		3AD367542BBCBA5500883573 /* LogoComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD367532BBCBA5500883573 /* LogoComponentView.swift */; };
+		3AD367562BBCC6D800883573 /* ButtonComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD367552BBCC6D800883573 /* ButtonComponentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,11 @@
 		3A221AB02BBC97D9009C4792 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3A221AB22BBC97DA009C4792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A221AB52BBC97DA009C4792 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3AD3674E2BBC9C1C00883573 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		3AD367502BBCB4E400883573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3AD367512BBCB74100883573 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		3AD367532BBCBA5500883573 /* LogoComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoComponentView.swift; sourceTree = "<group>"; };
+		3AD367552BBCC6D800883573 /* ButtonComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,12 +60,14 @@
 		3A221AAD2BBC97D9009C4792 /* Vasflix */ = {
 			isa = PBXGroup;
 			children = (
-				3A221ABE2BBC9824009C4792 /* ViewModel */,
+				3AD367502BBCB4E400883573 /* Info.plist */,
 				3A221ABD2BBC9817009C4792 /* Model */,
 				3A221ABC2BBC980A009C4792 /* View */,
+				3A221ABE2BBC9824009C4792 /* ViewModel */,
 				3A221AAE2BBC97D9009C4792 /* VasflixApp.swift */,
 				3A221AB22BBC97DA009C4792 /* Assets.xcassets */,
 				3A221AB42BBC97DA009C4792 /* Preview Content */,
+				3AD367512BBCB74100883573 /* Launch Screen.storyboard */,
 			);
 			path = Vasflix;
 			sourceTree = "<group>";
@@ -72,6 +83,7 @@
 		3A221ABC2BBC980A009C4792 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3AD3674D2BBC9BFA00883573 /* Theme */,
 				3A221ABF2BBC98EE009C4792 /* Components */,
 				3A221AB02BBC97D9009C4792 /* ContentView.swift */,
 			);
@@ -95,8 +107,18 @@
 		3A221ABF2BBC98EE009C4792 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3AD367532BBCBA5500883573 /* LogoComponentView.swift */,
+				3AD367552BBCC6D800883573 /* ButtonComponentView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		3AD3674D2BBC9BFA00883573 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3674E2BBC9C1C00883573 /* ColorTheme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD367522BBCB74100883573 /* Launch Screen.storyboard in Resources */,
 				3A221AB62BBC97DA009C4792 /* Preview Assets.xcassets in Resources */,
 				3A221AB32BBC97DA009C4792 /* Assets.xcassets in Resources */,
 			);
@@ -169,6 +192,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD3674F2BBC9C1C00883573 /* ColorTheme.swift in Sources */,
+				3AD367562BBCC6D800883573 /* ButtonComponentView.swift in Sources */,
+				3AD367542BBCBA5500883573 /* LogoComponentView.swift in Sources */,
 				3A221AB12BBC97D9009C4792 /* ContentView.swift in Sources */,
 				3A221AAF2BBC97D9009C4792 /* VasflixApp.swift in Sources */,
 			);
@@ -304,13 +330,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Vasflix/Preview Content\"";
+				DEVELOPMENT_TEAM = FPLL427MT3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Vasflix/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -318,9 +347,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adrianC.Vasflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -332,13 +365,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Vasflix/Preview Content\"";
+				DEVELOPMENT_TEAM = FPLL427MT3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Vasflix/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -346,9 +382,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adrianC.Vasflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -12,6 +12,7 @@ struct VasflixApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                
         }
     }
 }
