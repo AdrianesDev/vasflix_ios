@@ -1,2 +1,0 @@
-
-let API_KEY = "bf4876216d2b8c75c387fb31b853a900"
