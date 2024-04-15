@@ -8,14 +8,14 @@
 import SwiftUI
 
 
-struct ButtonComponentView: View {
+struct NavigationButtonComponentView<Destination: View>: View {
     let label: String
     let labelColor: Color?
     let labelSize: CGFloat?
     let labelWeight: Font.Weight?
     let icon: String?
     let iconImage: String?
-    let action: () -> Void
+    let action: Destination
     let backgroundColor: Color?
     
     init(
@@ -26,7 +26,7 @@ struct ButtonComponentView: View {
         labelWeight: Font.Weight? = .medium,
         icon: String? = nil,
         iconImage: String? = nil,
-        action: @escaping () -> Void
+        action:  Destination
     ) {
         self.label = label
         self.icon = icon
@@ -38,8 +38,8 @@ struct ButtonComponentView: View {
         self.backgroundColor = backgroundColor
     }
     var body: some View {
-        Button {
-            action()
+        NavigationLink{
+            action.navigationBarBackButtonHidden(true)
         }label: {
             HStack {
                 if let icon {
@@ -65,12 +65,15 @@ struct ButtonComponentView: View {
             
                 
         }
+        
     }
 }
 
 #Preview {
-    ButtonComponentView(
+    NavigationButtonComponentView(
         label: "Sign up with Google",
         backgroundColor: .caribeanColor,
-        iconImage: "google"){}
+        iconImage: "google",
+        action: HomeView()
+    )
 }
