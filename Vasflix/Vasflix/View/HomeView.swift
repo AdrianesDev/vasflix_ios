@@ -53,7 +53,6 @@ struct HomeView: View {
             .task {
                 do {
                     popularMovie = try await getPopularMovies()
-                    print(popularMovie?.results)
                 } catch ErrorCoding.invalidURL{
                     print("Invalid URL")
                 } catch ErrorCoding.invalidResponse {
