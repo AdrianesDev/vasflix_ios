@@ -10,5 +10,5 @@ import Foundation
 enum ErrorCoding: Error {
     case invalidURL
     case invalidResponse
-    case invalidData
+    case invalidData(Error)
 }

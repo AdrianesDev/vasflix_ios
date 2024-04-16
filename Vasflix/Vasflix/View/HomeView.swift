@@ -15,8 +15,10 @@ struct scrollPreKey : PreferenceKey {
 
 struct HomeView: View {
     @State var isScroll = false
-    @State private var popularMovie: PopularMoviesModel?
-    
+    @State var popularMovie: [Result] = []
+    @State var topRatedMovie: [TopRated] = []
+    @State var upcomingMovie: [UpcomingMovies] = []
+    @State var nowPlayingMovie: [NowPlayingMovie] = []
     var body: some View {
         
         ScrollView {
@@ -26,12 +28,14 @@ struct HomeView: View {
             }
             ScrollView(.horizontal) {
                 HStack(alignment: .center, spacing: 30){
-                    ForEach(0..<5) {_ in
-                        HorizontalPosterCardComponentView()
+                    ForEach(nowPlayingMovie, id: \.id) { nowPlaying in
+                        HorizontalPosterCardComponentView(title: nowPlaying.title, backdropImage: nowPlaying.backdropPath)
                     }
                 }
             }
             .padding(.leading,30)
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.viewAligned)
             
             Spacer()
                 .frame(height: 30)
@@ -42,27 +46,17 @@ struct HomeView: View {
                     .foregroundStyle(.white)
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
-                        ForEach(0..<5, id: \.self) { result in
-                            VerticalPosterCardComponentView()
+                        ForEach(popularMovie, id: \.id) { popular in
+                            VerticalPosterCardComponentView(
+                                posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title, category: popular.title)
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.viewAligned)
                 
             }
             .padding(.leading,30)
-            .task {
-                do {
-                    popularMovie = try await getPopularMovies()
-                } catch ErrorCoding.invalidURL{
-                    print("Invalid URL")
-                } catch ErrorCoding.invalidResponse {
-                    print("Invalid Response")
-                } catch ErrorCoding.invalidData {
-                    print("Invalid Data")
-                } catch {
-                    print("unexpeted Error")
-                }
-            }
             
             Spacer()
                 .frame(height: 30)
@@ -73,11 +67,13 @@ struct HomeView: View {
                     .foregroundStyle(.white)
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
-                        ForEach(0..<5) {_ in
-                            VerticalPosterCardComponentView()
+                        ForEach(topRatedMovie, id: \.id) {topRated in
+                            VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.title)
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.viewAligned)
                 
             }
             .padding(.leading,30)
@@ -91,16 +87,38 @@ struct HomeView: View {
                     .foregroundStyle(.white)
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
-                        ForEach(0..<5) {_ in
-                            VerticalPosterCardComponentView()
+                        ForEach(upcomingMovie, id: \.id) {upcoming in
+                            VerticalPosterCardComponentView(posterImage: upcoming.posterPath, popularity: upcoming.voteAverage, titleMovie: upcoming.title, category: upcoming.title)
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.viewAligned)
                 
                 
             }
             .padding(.leading,30)
             
+        }
+        .scrollIndicators(.hidden)
+        .scrollTargetLayout()
+        .task {
+            do {
+
+                popularMovie = try await getPopularMovies()
+                topRatedMovie = try await getTopRatedMovies()
+                upcomingMovie = try await getUpcomingMovies()
+                nowPlayingMovie = try await getNowPlayingMovie()
+                
+            } catch ErrorCoding.invalidURL{
+                print("Invalid URL")
+            } catch ErrorCoding.invalidResponse {
+                print("Invalid Response")
+            } catch ErrorCoding.invalidData(let error) {
+                print("Invalid Data \(error)")
+            } catch {
+                print("unexpeted Error")
+            }
         }
         .coordinateSpace(name: "scroll")
         .onPreferenceChange(scrollPreKey.self, perform: { value in
@@ -142,18 +160,11 @@ struct HomeView: View {
             .frame(maxHeight: .infinity, alignment: .top)
             
             
+            
         }
         
         
-        
-        
-        
-        
-        
     }
-    
-    
-    
     
     
 }

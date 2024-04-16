@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct HorizontalPosterCardComponentView: View {
+    let title:String
+    let backdropImage:String
+    init(title: String, backdropImage: String) {
+        self.title = title
+        self.backdropImage = backdropImage
+    }
     var body: some View {
         
         ZStack(alignment: .bottomLeading) {
-            Image("GODZILLA-VS-KONG")
-                .resizable()
+            AsyncImage(url: URL( string: "https://image.tmdb.org/t/p/original/\(backdropImage)")) { image in
+                image.resizable()
+            }placeholder: {
+                ProgressView()
+            }
                 .frame(width: 310,height: 162)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             
-            Text("Godzila vs Kong")
+            Text(title)
                 .font(.system(size:16,weight: .bold))
                 .foregroundStyle(.white)
                 .padding()
@@ -28,6 +37,6 @@ struct HorizontalPosterCardComponentView: View {
 }
 
 #Preview {
-    HorizontalPosterCardComponentView()
+    HorizontalPosterCardComponentView(title: "king kong", backdropImage: "/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg")
 
 }

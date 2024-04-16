@@ -1,14 +1,14 @@
 //
-//  PopularMovies.swift
+//  TopRatedMovies.swift
 //  Vasflix
 //
-//  Created by Adrian Castañeda on 11/04/24.
+//  Created by Adrian Castañeda on 16/04/24.
 //
 
 import Foundation
 
-func getPopularMovies() async throws -> [Result] {
-    let endpoint = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)"
+func getTopRatedMovies() async throws -> [TopRated] {
+    let endpoint = "https://api.themoviedb.org/3/movie/top_rated?api_key=\(API_KEY)"
     
     do {
         guard let url = URL(string: endpoint) else {
@@ -21,11 +21,9 @@ func getPopularMovies() async throws -> [Result] {
         }
         
         let decoder = JSONDecoder()
-        let decoded = try decoder.decode(PopularMoviesModel.self, from: data)
+        let decoded = try decoder.decode(TopRatedMoviesModel.self, from: data)
         return decoded.results
-    } catch {
-        
+    }catch {
         throw ErrorCoding.invalidData(error)
     }
 }
-
