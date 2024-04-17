@@ -31,19 +31,25 @@ struct HomeView: View {
                     ForEach(nowPlayingMovie, id: \.id) { nowPlaying in
                         HorizontalPosterCardComponentView(title: nowPlaying.title, backdropImage: nowPlaying.backdropPath)
                     }
+                    
                 }
+                .padding(.horizontal,25)
             }
-            .padding(.leading,30)
+
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned)
             
             Spacer()
                 .frame(height: 30)
             //MARK: - popular movies
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 15) {
                 Text("Trending now")
                     .font(.system(size: 20,weight: .medium))
+                    .padding(.leading,25)
                     .foregroundStyle(.white)
+                    
+                    
+                    
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
                         ForEach(popularMovie, id: \.id) { popular in
@@ -51,12 +57,15 @@ struct HomeView: View {
                                 posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title, category: popular.title)
                         }
                     }
+                    .padding(.horizontal,25)
                 }
                 .scrollIndicators(.hidden)
                 .scrollTargetBehavior(.viewAligned)
+    
                 
             }
-            .padding(.leading,30)
+            
+            
             
             Spacer()
                 .frame(height: 30)
@@ -64,6 +73,7 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 Text("Top Rated")
                     .font(.system(size: 20,weight: .medium))
+                    .padding(.leading,25)
                     .foregroundStyle(.white)
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
@@ -71,12 +81,13 @@ struct HomeView: View {
                             VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.title)
                         }
                     }
+                    .padding(.horizontal,25)
                 }
                 .scrollIndicators(.hidden)
                 .scrollTargetBehavior(.viewAligned)
                 
             }
-            .padding(.leading,30)
+            
             
             Spacer()
                 .frame(height: 30)
@@ -84,6 +95,7 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 Text("Upcoming movies")
                     .font(.system(size: 20,weight: .medium))
+                    .padding(.leading,25)
                     .foregroundStyle(.white)
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
@@ -91,13 +103,14 @@ struct HomeView: View {
                             VerticalPosterCardComponentView(posterImage: upcoming.posterPath, popularity: upcoming.voteAverage, titleMovie: upcoming.title, category: upcoming.title)
                         }
                     }
+                    .padding(.horizontal,25)
                 }
                 .scrollIndicators(.hidden)
                 .scrollTargetBehavior(.viewAligned)
                 
                 
             }
-            .padding(.leading,30)
+            
             
         }
         .scrollIndicators(.hidden)
