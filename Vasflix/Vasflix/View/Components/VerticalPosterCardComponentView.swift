@@ -11,13 +11,38 @@ struct VerticalPosterCardComponentView: View {
     let posterImage: String
     var popularity: Double
     let titleMovie: String
-    let category: String
+    let category: [Int]
+    
+    var genreMovie = [
+       
+        28:"Action",
+        12:"Adventure",
+        16: "Animation",
+        35: "Comedy",
+        80: "Crime",
+        99: "Documentary",
+        18: "Drama",
+        10751: "Family",
+        14: "Fantasy",
+        36: "History",
+        27: "Horror",
+        10402: "Music",
+        9648: "Mystery",
+        10749: "Romance",
+        878: "Science Fiction",
+        10770: "TV Movie",
+        53: "Thriller",
+        10752: "War",
+        37: "Western"
+           
+    ]
     
     init(
     posterImage: String,
     popularity: Double,
     titleMovie: String,
-    category: String
+    category: [Int]
+    
     ) {
         self.category = category
         self.popularity = popularity
@@ -65,11 +90,13 @@ struct VerticalPosterCardComponentView: View {
                     .frame(width: 122,alignment: .leading)
                     .lineLimit(1)
                     .foregroundStyle(.white)
-                    
-                Text(category)
-                    .font(.system(size: 12,weight: .light))
-                    .frame(width: 122,alignment: .leading)
-                    .foregroundStyle(.white.opacity(0.60))
+                
+
+                Text("\(genreMovie[category[0]] ?? "Unknow")")
+                            .font(.system(size: 12,weight: .light))
+                            .frame(width: 122,alignment: .leading)
+                            .foregroundStyle(.white.opacity(0.60))
+
             }
             
         }
@@ -78,7 +105,7 @@ struct VerticalPosterCardComponentView: View {
 
 #Preview {
     VerticalPosterCardComponentView(
-    posterImage: "/iq1t8MxKDkKuV1WqyOr2RQM0hIA.jpg", popularity: 2, titleMovie: "Star wars", category: "Action"
+        posterImage: "/iq1t8MxKDkKuV1WqyOr2RQM0hIA.jpg", popularity: 2, titleMovie: "Star wars", category: [878,12]
     )
     .background(.navy)
         

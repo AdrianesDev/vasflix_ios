@@ -19,6 +19,7 @@ struct HomeView: View {
     @State var topRatedMovie: [TopRated] = []
     @State var upcomingMovie: [UpcomingMovies] = []
     @State var nowPlayingMovie: [NowPlayingMovie] = []
+    @State var genre: [Genre] = []
     var body: some View {
         
         ScrollView {
@@ -35,7 +36,7 @@ struct HomeView: View {
                 }
                 .padding(.horizontal,25)
             }
-
+            
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned)
             
@@ -47,21 +48,22 @@ struct HomeView: View {
                     .font(.system(size: 20,weight: .medium))
                     .padding(.leading,25)
                     .foregroundStyle(.white)
-                    
-                    
-                    
+                
+                
+                
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
-                        ForEach(popularMovie, id: \.id) { popular in
+                        ForEach(popularMovie, id: \.id) { popular  in
                             VerticalPosterCardComponentView(
-                                posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title, category: popular.title)
+                                posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title,
+                                category: popular.genreIDS)
                         }
                     }
                     .padding(.horizontal,25)
                 }
                 .scrollIndicators(.hidden)
                 .scrollTargetBehavior(.viewAligned)
-    
+                
                 
             }
             
@@ -78,7 +80,7 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
                         ForEach(topRatedMovie, id: \.id) {topRated in
-                            VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.title)
+                            VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.genreIDS)
                         }
                     }
                     .padding(.horizontal,25)
@@ -100,7 +102,11 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 15){
                         ForEach(upcomingMovie, id: \.id) {upcoming in
-                            VerticalPosterCardComponentView(posterImage: upcoming.posterPath, popularity: upcoming.voteAverage, titleMovie: upcoming.title, category: upcoming.title)
+                            VerticalPosterCardComponentView(
+                                posterImage: upcoming.posterPath,
+                                popularity: upcoming.voteAverage,
+                                titleMovie: upcoming.title,
+                                category: upcoming.genreIDS)
                         }
                     }
                     .padding(.horizontal,25)
@@ -117,11 +123,12 @@ struct HomeView: View {
         .scrollTargetLayout()
         .task {
             do {
-
+                
                 popularMovie = try await getPopularMovies()
                 topRatedMovie = try await getTopRatedMovies()
                 upcomingMovie = try await getUpcomingMovies()
                 nowPlayingMovie = try await getNowPlayingMovie()
+                genre = try await getMovieGenderList()
                 
             } catch ErrorCoding.invalidURL{
                 print("Invalid URL")
@@ -167,7 +174,7 @@ struct HomeView: View {
                     .frame(width: 100, height: 20)
                     .padding(.bottom,50)
                     .offset(y: isScroll ? -10 : -15)
-                    
+                
                 
             }
             .frame(maxHeight: .infinity, alignment: .top)
