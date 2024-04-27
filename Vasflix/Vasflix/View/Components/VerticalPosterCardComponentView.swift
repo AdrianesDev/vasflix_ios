@@ -55,7 +55,7 @@ struct VerticalPosterCardComponentView: View {
             ZStack(alignment: .bottomLeading) {
                 AsyncImage(url: URL( string: "https://image.tmdb.org/t/p/original/\(posterImage)")) { image in
                     image.resizable()
-                }placeholder: {
+                } placeholder: {
                     ProgressView()
                 }
                 .frame(width: 122,height: 152)
