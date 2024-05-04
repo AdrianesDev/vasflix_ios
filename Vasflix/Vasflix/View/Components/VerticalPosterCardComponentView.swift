@@ -54,13 +54,29 @@ struct VerticalPosterCardComponentView: View {
            
             ZStack(alignment: .bottomLeading) {
                 AsyncImage(url: URL( string: "https://image.tmdb.org/t/p/original/\(posterImage)")) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
+                    switch image {
+                    case .empty:
+                        ZStack {
+                            Rectangle()
+                                .tint(.gray)
+                                .frame(width: 122,height: 152)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                            ProgressView()
+                        }
+                    case .success(let imageView):
+                        imageView
+                            .resizable()
+                            .frame(width: 122,height: 152)
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    case .failure:
+                        Image(systemName: "photo")
+                        
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
-                .frame(width: 122,height: 152)
-                .scaledToFill()
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                
                     
                     
                 

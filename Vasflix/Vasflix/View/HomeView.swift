@@ -23,7 +23,7 @@ struct HomeView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 GeometryReader { proxy in
                     Color.clear.preference(key: scrollPreKey.self, value: proxy.frame(in: .named("scroll")).minY)
@@ -32,7 +32,7 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 30){
                         ForEach(nowPlayingMovie, id: \.id) { nowPlaying in
-                            NavigationLink(destination: ReviewMovieView() ) {
+                            NavigationLink(destination: ReviewMovieView(title: nowPlaying.title, date: nowPlaying.releaseDate, description: nowPlaying.overview,category: nowPlaying.genreIDS,image: nowPlaying.backdropPath)) {
                                 HorizontalPosterCardComponentView(title: nowPlaying.title, backdropImage: nowPlaying.backdropPath)
                             }
                         }
@@ -42,7 +42,7 @@ struct HomeView: View {
                 }
                 
                 .scrollIndicators(.hidden)
-            .scrollTargetBehavior(.viewAligned)
+                .scrollTargetBehavior(.viewAligned)
                 
                 Spacer()
                     .frame(height: 30)
@@ -58,9 +58,11 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 15){
                             ForEach(popularMovie, id: \.id) { popular  in
-                                VerticalPosterCardComponentView(
-                                    posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title,
-                                    category: popular.genreIDS)
+                                NavigationLink(destination: ReviewMovieView(title: popular.title, date: popular.releaseDate, description: popular.overview, category: popular.genreIDS, image: popular.backdropPath)) {
+                                    VerticalPosterCardComponentView(
+                                        posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title,
+                                        category: popular.genreIDS)
+                                }
                             }
                         }
                         .padding(.horizontal,25)
@@ -84,7 +86,9 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 15){
                             ForEach(topRatedMovie, id: \.id) {topRated in
-                                VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.genreIDS)
+                                NavigationLink(destination: ReviewMovieView(title: topRated.title, date: topRated.releaseDate, description: topRated.overview, category: topRated.genreIDS, image: topRated.backdropPath) ) {
+                                    VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.genreIDS)
+                                }
                             }
                         }
                         .padding(.horizontal,25)
@@ -106,11 +110,13 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 15){
                             ForEach(upcomingMovie, id: \.id) {upcoming in
-                                VerticalPosterCardComponentView(
-                                    posterImage: upcoming.posterPath,
-                                    popularity: upcoming.voteAverage,
-                                    titleMovie: upcoming.title,
-                                    category: upcoming.genreIDS)
+                                NavigationLink(destination: ReviewMovieView(title: upcoming.title, date: upcoming.releaseDate, description: upcoming.overview, category: upcoming.genreIDS, image: upcoming.backdropPath)) {
+                                    VerticalPosterCardComponentView(
+                                        posterImage: upcoming.posterPath,
+                                        popularity: upcoming.voteAverage,
+                                        titleMovie: upcoming.title,
+                                        category: upcoming.genreIDS)
+                                }
                             }
                         }
                         .padding(.horizontal,25)
@@ -185,7 +191,7 @@ struct HomeView: View {
                 
                 
                 
-        }
+            }
         }
         
         

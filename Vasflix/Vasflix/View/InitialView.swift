@@ -24,8 +24,8 @@ struct InitialView: View {
                     SearchView()
                         .tag(Tab.search)
                         
-                    FavoritesView()
-                        .tag(Tab.favorite)
+//                    FavoritesView()
+//                        .tag(Tab.favorite)
                         
                     SettingsView()
                         .tag(Tab.avatar)

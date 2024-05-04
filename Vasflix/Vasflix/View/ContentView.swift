@@ -48,7 +48,7 @@ struct ContentView: View {
                         label: "Sign in with Google",
                         labelColor: .black,
                         iconImage: "google",
-                        action: HomeView())
+                        action: InitialView())
                     Spacer()
                     
                     

@@ -18,17 +18,39 @@ struct HorizontalPosterCardComponentView: View {
         
         ZStack(alignment: .bottomLeading) {
             AsyncImage(url: URL( string: "https://image.tmdb.org/t/p/original/\(backdropImage)")) { image in
-                image.resizable()
-            }placeholder: {
-                ProgressView()
+                switch image {
+                case .empty:
+                    ZStack {
+                        Rectangle()
+                            .tint(.gray)
+                            .frame(width: 310,height: 162)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                        ProgressView()
+                    }
+                case .success(let imageView):
+                    imageView
+                        .resizable()
+                        .frame(width: 310,height: 162)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                case .failure:
+                    Image(systemName: "photo")
+                        .background(.gray)
+                        .frame(width: 310,height: 162)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    
+                @unknown default:
+                    EmptyView()
+                }
             }
-                .frame(width: 310,height: 162)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            
             
             Text(title)
                 .font(.system(size:16,weight: .bold))
+                .lineLimit(1)
                 .foregroundStyle(.white)
+                .shadow(color: .black,radius: 4)
                 .padding()
+                .frame(width: 310,alignment: .leading)
         }
             
                         

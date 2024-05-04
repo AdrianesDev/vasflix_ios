@@ -12,11 +12,7 @@ class ButtonActions {
     
     func valideFavoriteButton(isFavorite: Bool) {
         
-        if isFavorite{
-            return isFavorite = false
-        }else {
-            isFavorite = true
-        }
+        
         
     }
 }
