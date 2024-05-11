@@ -7,15 +7,21 @@ import Foundation
 
 // MARK: - TopRatedMoviesModel
 struct TopRatedMoviesModel: Codable {
-    
+    let page: Int
     let results: [TopRated]
+    let totalPages, totalResults: Int
 
+    enum CodingKeys: String, CodingKey {
+        case page, results
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+    }
 }
 
 // MARK: - Result
 struct TopRated: Codable {
     let adult: Bool
-    let backdropPath: String
+    let backdropPath: String?
     let genreIDS: [Int]
     let id: Int
     let originalLanguage, originalTitle, overview: String

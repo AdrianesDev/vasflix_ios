@@ -10,6 +10,7 @@ import Foundation
 func getPopularMovies() async throws -> [Result] {
     let endpoint = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)"
     
+    
     do {
         guard let url = URL(string: endpoint) else {
             throw ErrorCoding.invalidURL

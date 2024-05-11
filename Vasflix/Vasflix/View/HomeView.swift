@@ -32,8 +32,8 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 30){
                         ForEach(nowPlayingMovie, id: \.id) { nowPlaying in
-                            NavigationLink(destination: ReviewMovieView(title: nowPlaying.title, date: nowPlaying.releaseDate, description: nowPlaying.overview,category: nowPlaying.genreIDS,image: nowPlaying.backdropPath)) {
-                                HorizontalPosterCardComponentView(title: nowPlaying.title, backdropImage: nowPlaying.backdropPath)
+                            NavigationLink(destination: ReviewMovieView(title: nowPlaying.title, date: nowPlaying.releaseDate, description: nowPlaying.overview,category: nowPlaying.genreIDS,image: nowPlaying.backdropPath ?? "")) {
+                                HorizontalPosterCardComponentView(title: nowPlaying.title, backdropImage: nowPlaying.backdropPath ?? "")
                             }
                         }
                         
@@ -58,7 +58,7 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 15){
                             ForEach(popularMovie, id: \.id) { popular  in
-                                NavigationLink(destination: ReviewMovieView(title: popular.title, date: popular.releaseDate, description: popular.overview, category: popular.genreIDS, image: popular.backdropPath)) {
+                                NavigationLink(destination: ReviewMovieView(title: popular.title, date: popular.releaseDate, description: popular.overview, category: popular.genreIDS, image: popular.backdropPath ?? "")) {
                                     VerticalPosterCardComponentView(
                                         posterImage: popular.posterPath, popularity: popular.voteAverage, titleMovie: popular.title,
                                         category: popular.genreIDS)
@@ -86,7 +86,7 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 15){
                             ForEach(topRatedMovie, id: \.id) {topRated in
-                                NavigationLink(destination: ReviewMovieView(title: topRated.title, date: topRated.releaseDate, description: topRated.overview, category: topRated.genreIDS, image: topRated.backdropPath) ) {
+                                NavigationLink(destination: ReviewMovieView(title: topRated.title, date: topRated.releaseDate, description: topRated.overview, category: topRated.genreIDS, image: topRated.backdropPath ?? "") ) {
                                     VerticalPosterCardComponentView(posterImage: topRated.posterPath, popularity: topRated.voteAverage, titleMovie: topRated.title, category: topRated.genreIDS)
                                 }
                             }
@@ -110,7 +110,7 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 15){
                             ForEach(upcomingMovie, id: \.id) {upcoming in
-                                NavigationLink(destination: ReviewMovieView(title: upcoming.title, date: upcoming.releaseDate, description: upcoming.overview, category: upcoming.genreIDS, image: upcoming.backdropPath)) {
+                                NavigationLink(destination: ReviewMovieView(title: upcoming.title, date: upcoming.releaseDate, description: upcoming.overview, category: upcoming.genreIDS, image: upcoming.backdropPath ?? "")) {
                                     VerticalPosterCardComponentView(
                                         posterImage: upcoming.posterPath,
                                         popularity: upcoming.voteAverage,
@@ -133,7 +133,6 @@ struct HomeView: View {
             .scrollTargetLayout()
             .task {
                 do {
-                    
                     popularMovie = try await getPopularMovies()
                     topRatedMovie = try await getTopRatedMovies()
                     upcomingMovie = try await getUpcomingMovies()
