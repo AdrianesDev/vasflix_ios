@@ -6,10 +6,23 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignInView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
+    @State var isVisiblePassword: Bool = false
+    @AppStorage("uid") var userID: String = ""
+    
+    private func showPassword() -> Void {
+        
+        if isVisiblePassword {
+             return isVisiblePassword = false
+        }
+        
+        return isVisiblePassword = true
+    }
+    
     var body: some View {
         ZStack {
             Color.navyColor
@@ -30,6 +43,7 @@ struct SignInView: View {
                         .font(.system(size: 40,weight: .bold))
                         .foregroundStyle(.white)
                     Text("Please inter your details.")
+                        .foregroundStyle(.white)
                         .font(.system(size: 15))
                         .foregroundStyle(.white.opacity(0.70))
                         
@@ -40,7 +54,9 @@ struct SignInView: View {
                         Text("Email")
                             .font(.system(size: 15))
                             .foregroundStyle(.white)
-                        TextField("Enter your email", text: $emailText )
+                        TextField("", text: $emailText,prompt: Text("Enter your email").foregroundStyle(.gray) )
+                            .foregroundStyle(.black)
+                            .textInputAutocapitalization(.never)
                             .padding(.vertical,15)
                             .padding(.horizontal,12)
                             .background(.white)
@@ -56,8 +72,23 @@ struct SignInView: View {
                             .font(.system(size: 15))
                             .foregroundStyle(.white)
                         HStack {
-                            TextField("Enter your password", text: $passwordText )
-                            Image(systemName: "eye.fill")
+                            if isVisiblePassword {
+                                TextField("", text: $passwordText,prompt: Text("Enter your password").foregroundStyle(.gray) )
+                                    .foregroundStyle(.black)
+                                    .textInputAutocapitalization(.never)
+                            }
+                            else {
+                                SecureField("Enter your password", text: $passwordText,prompt: Text("Enter your password").foregroundStyle(.gray) )
+                                    .foregroundStyle(.black)
+                                    .textInputAutocapitalization(.never)
+                            }
+                            
+                            Button {
+                                showPassword()
+                            }label: {
+                                Image(systemName: isVisiblePassword ?  "eye.fill" : "eye.slash.fill")
+                                    .tint(.black)
+                            }
 
                         }
                         .padding(.vertical,15)
@@ -73,11 +104,34 @@ struct SignInView: View {
                 }
                 .padding()
                 Spacer()
-                NavigationButtonComponentView(
-                    label: "Log in",
-                    backgroundColor: .caribeanColor,
-                    action: InitialView()
-                )
+                Button{
+                    Auth.auth().signIn(withEmail: emailText, password: passwordText) { authResult, error in
+                        
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        
+                        if let authResult = authResult {
+                            withAnimation {
+                                userID = authResult.user.uid
+                            }
+                        }
+                }
+                }label: {
+                    
+                        
+                        Text("Log in")
+                            .font(.system(size: 16 ,weight: .bold))
+                            .foregroundStyle(.white)
+                            .frame(width: 263,height: 55)
+                            .background(RoundedRectangle(cornerRadius: 10))
+                            .buttonStyle(.borderedProminent)
+                            .tint(.caribean)
+
+                    
+                }
+                
                 Spacer()
                 
                 
