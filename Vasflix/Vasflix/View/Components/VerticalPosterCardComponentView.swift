@@ -56,18 +56,18 @@ struct VerticalPosterCardComponentView: View {
                 AsyncImage(url: URL( string: "https://image.tmdb.org/t/p/original/\(posterImage)")) { image in
                     switch image {
                     case .empty:
-                        ZStack {
+                        ZStack  {
                             Rectangle()
                                 .tint(.gray)
                                 .frame(width: 122,height: 152)
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                            ProgressView()
+                              ProgressView()
                         }
                     case .success(let imageView):
                         imageView
                             .resizable()
-                            .frame(width: 122,height: 152)
                             .scaledToFill()
+                            .frame(width: 122,height: 152)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                     case .failure:
                         Image(systemName: "photo")
@@ -88,7 +88,7 @@ struct VerticalPosterCardComponentView: View {
                     Spacer()
                         .frame(width: 2)
                     Text("( \(popularity.formatted(.number.precision(.fractionLength(1)))) )")
-                        .font(.system(size: 10,weight: .semibold))
+                        .font(.system(size: 12,weight: .semibold))
                         .foregroundStyle(.white)
                 }
                 .padding(4)
@@ -101,7 +101,8 @@ struct VerticalPosterCardComponentView: View {
             
             VStack(alignment: .leading) {
                 Text(titleMovie)
-                    .font(.system(size: 12,weight: .semibold))
+                    .font(.caption)
+                    .fontWeight(.semibold)
                     .fixedSize(horizontal: false, vertical: false)
                     .frame(width: 122,alignment: .leading)
                     .lineLimit(1)
@@ -109,9 +110,10 @@ struct VerticalPosterCardComponentView: View {
                 
 
                 Text("\(genreMovie[category[0]] ?? "Unknow")")
-                            .font(.system(size: 12,weight: .light))
-                            .frame(width: 122,alignment: .leading)
-                            .foregroundStyle(.white.opacity(0.60))
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.8))
+                    .frame(width: 122,alignment: .leading)
+                            
 
             }
             

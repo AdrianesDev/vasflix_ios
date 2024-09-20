@@ -21,7 +21,7 @@ struct SearchView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]) {
-                    ForEach(filterMovies, id: \.id) { discoverMovie in 
+                    ForEach(filterMovies, id: \.id) { discoverMovie in
                         
                         NavigationLink(destination: ReviewMovieView(title: discoverMovie.title, date: discoverMovie.releaseDate, description: discoverMovie.overview, category: discoverMovie.genreIDS, image: discoverMovie.backdropPath ?? "")) {
                             VerticalPosterCardComponentView(posterImage: discoverMovie.posterPath, popularity: discoverMovie.popularity, titleMovie: discoverMovie.title, category: discoverMovie.genreIDS)

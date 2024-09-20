@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct HorizontalPosterCardComponentView: View {
-    let title:String
-    let backdropImage:String
-    init(title: String, backdropImage: String) {
-        self.title = title
-        self.backdropImage = backdropImage
-    }
+    @State var title:String
+    @State var backdropImage:String
+//    init(title: String, backdropImage: String) {
+//        self.title = title
+//        self.backdropImage = backdropImage
+//    }
     var body: some View {
         
         ZStack(alignment: .bottomLeading) {
@@ -30,6 +30,7 @@ struct HorizontalPosterCardComponentView: View {
                 case .success(let imageView):
                     imageView
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 310,height: 162)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 case .failure:

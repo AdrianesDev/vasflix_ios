@@ -9,12 +9,15 @@ import SwiftUI
 
 struct LogoComponentView: View {
     var body: some View {
-        Image("vasflixLogo")
-            .resizable()
-            .frame(width: 145,height: 145)
-        Image("VasflixLetter")
-            .resizable()
-            .frame(width: 164,height: 33)
+        VStack {
+            Image("vasflixLogo")
+                .resizable()
+                .frame(width: 145,height: 145)
+            Image("VasflixLetter")
+                .resizable()
+                .frame(width: 164,height: 33)
+        }
+        
         
     }
 }
