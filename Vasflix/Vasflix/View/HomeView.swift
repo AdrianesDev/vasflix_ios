@@ -20,6 +20,7 @@ struct HomeView: View {
     @State var upcomingMovie: [UpcomingMovies] = []
     @State var nowPlayingMovie: [NowPlayingMovie] = []
     @State var genre: [Genre] = []
+    @StateObject var movieService = GetApiDataViewModel()
     
     var body: some View {
         
@@ -71,9 +72,7 @@ struct HomeView: View {
                     .scrollTargetBehavior(.viewAligned)
                     
                     
-                }
-                
-                
+                }//: VSTACK
                 
                 Spacer()
                     .frame(height: 30)
@@ -96,7 +95,7 @@ struct HomeView: View {
                     .scrollIndicators(.hidden)
                     .scrollTargetBehavior(.viewAligned)
                     
-                }
+                } //: VSTACK
                 
                 
                 Spacer()
@@ -125,19 +124,19 @@ struct HomeView: View {
                     .scrollTargetBehavior(.viewAligned)
                     
                     
-                }
+                } //: VSTACK
                 
-                
-            }
+            } //: SCROLL VIEW
             .scrollIndicators(.hidden)
             .scrollTargetLayout()
             .task {
                 do {
-                    popularMovie = try await getPopularMovies()
-                    topRatedMovie = try await getTopRatedMovies()
-                    upcomingMovie = try await getUpcomingMovies()
-                    nowPlayingMovie = try await getNowPlayingMovie()
-                    genre = try await getMovieGenderList()
+                   
+                    popularMovie = try await movieService.getPopularMovies()
+                    topRatedMovie = try await movieService.getTopRatedMovies()
+                    upcomingMovie = try await movieService.getUpcomingMovies()
+                    nowPlayingMovie = try await movieService.getNowPlayingMovie()
+                    genre = try await movieService.getMovieGenderList()
                     
                 } catch ErrorCoding.invalidURL{
                     print("Invalid URL")
@@ -191,7 +190,7 @@ struct HomeView: View {
                 
                 
             }
-        }
+        } //: NAVIGATION STACK
         
         
     }

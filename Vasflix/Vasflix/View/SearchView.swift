@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @State var discoverMovies: [Discover] = []
     @State private var searchMovie: String = ""
+    @StateObject var movieService = GetApiDataViewModel()
     
     var filterMovies: [Discover] {
         guard !searchMovie.isEmpty else {return discoverMovies}
@@ -44,7 +45,7 @@ struct SearchView: View {
         
         .task {
             do {
-                discoverMovies = try await getDiscoverMovies()
+                discoverMovies = try await movieService.getDiscoverMovies()
             }
             catch ErrorCoding.invalidURL{
                 print("Invalid URL")
